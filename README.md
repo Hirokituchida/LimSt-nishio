@@ -26,4 +26,3 @@ calculator/
 compoundInterestEx/  
 [week10_数当てゲーム]  
 numeron/  
-# LimSt-nishio
