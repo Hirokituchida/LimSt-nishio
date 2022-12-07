@@ -32,3 +32,5 @@ build/
 
 .history/
 .DS_Store
+/bin/
+/.apt_generated_tests/
