@@ -19,6 +19,7 @@ public class BmiService {
      * @return result bmi計算結果
      */
     public double getBmiCalcResult(double height, double weight) {
+    	return weight/(height*height);
 
         // BMI計算
 
