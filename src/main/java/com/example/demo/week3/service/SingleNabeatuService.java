@@ -19,6 +19,8 @@ public class SingleNabeatuService {
      * @return flg アホになる('3を含む数字'または'3の倍数')かどうかの結果
      */
     public boolean isAhoNumber(int inputNumber) {
+    	boolean flgl=inputNumber%3==0||inputNumber%10==3||inputNumber/10==3||inputNumber/100==3||(inputNumber%100)/10==3;
+    	return flgl;
  
     }
 }
