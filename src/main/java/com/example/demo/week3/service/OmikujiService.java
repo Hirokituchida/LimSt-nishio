@@ -18,6 +18,10 @@ public class OmikujiService {
      * @return result おみくじの結果
      */
     public String getResult() {
+    	String[] omikujis= {"大吉","中吉","凶"};
+    	Random r=new Random();
+    	String result=omikujis[r.nextInt(3)];
+    	return result;
 
     }
 
@@ -37,6 +41,15 @@ public class OmikujiService {
     public String getResultComment(String result) {
 
         //おみくじの結果に紐づいた、コメントを定数として定義
+    	String resultComment;
+    	if(result.equals("大吉")) {
+    		resultComment="大吉です。今日はとてもいい日になるでしょう";
+    	}else if(result.equals("中吉")) {
+    		resultComment="中吉です。今日はいい日になるでしょう";
+    	}else {
+    		resultComment="凶です。今日はよくない日になるでしょう";
+    	}
+    	return resultComment;
 
     }
 }
