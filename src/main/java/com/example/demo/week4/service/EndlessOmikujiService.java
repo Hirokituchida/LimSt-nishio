@@ -19,7 +19,16 @@ public class EndlessOmikujiService {
      * @return result おみくじの結果
      */
     public String getResult() {
-
+    	String[] omikuji= {"大吉","中吉","凶"};
+    	Random r=new Random();
+    	String result;
+    	while(true) {
+    		result=omikuji[r.nextInt(3)];
+    		if(result.equals("凶")) {
+    			break;
+    		}
+    	}
+    	return result;
     }
 
     /**
@@ -34,6 +43,14 @@ public class EndlessOmikujiService {
      * @return resultComment 無限おみくじの仕様に沿ったコメント
      */
     public String getResultComment() {
-
+    	String resultComment;
+    	if(getResult().equals("大吉")) {
+    		resultComment="大吉です。すごくいい日になるでしょう";
+    	}else if(getResult().equals("中吉")) {
+    		resultComment="中吉です。いい日になるでしょう";
+    	}else {
+    		resultComment="凶です。今あなたの後ろに・・・";
+    	}
+    	return resultComment;
     }
 }
