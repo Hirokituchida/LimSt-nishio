@@ -61,7 +61,7 @@ public class CalculatorService {
 	public String convertPysicalCalcType(String calcType) {
 
 		//calcTypeNameArrayで宣言した、各演算子のインデックスを定義(定数)
-		final String[] calcTypeNameArray= {"足し算","引き算","掛け算","割り算"};
+		final String[] calcTypeNameArray=getCalcTypeNameArray();
 		//pysicalCalcTypeの取得処理
 		String pysicalCalcType;
 		if(calcType.equals("add")) {
