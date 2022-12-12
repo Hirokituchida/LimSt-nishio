@@ -1,5 +1,6 @@
 package com.example.demo.week10.service;
-
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -16,7 +17,9 @@ public class NumeronService {
      * ・ターン数(turn) ターン数の初期値は0
      * </pre>
      */
-
+	List<Integer> answerList = new  ArrayList<Integer>();
+	List<Integer> attackList = new  ArrayList<Integer>();
+	int turn = 0;
     /**
      * <pre>
      *【問題文】
@@ -24,6 +27,7 @@ public class NumeronService {
      * </pre>
      */
     public NumeronService() {
+    	init();
     }
 
     /**
@@ -36,6 +40,15 @@ public class NumeronService {
      * @return answerList ランダム数値3桁が格納されるリスト(答えの数列)
      */
     public List<Integer> init() {
+    	List<Integer> kotaeList = new ArrayList<Integer>();
+    	for(int i = 0;i<10;++i) {
+    		kotaeList.add(i);
+    	}
+    	Collections.shuffle(kotaeList);	
+    	answerList.add(kotaeList.get(0));
+    	answerList.add(kotaeList.get(1));
+    	answerList.add(kotaeList.get(2));
+    	return answerList;
     }
 
     /**
@@ -60,21 +73,29 @@ public class NumeronService {
     public List<Integer> getAttackResult(List<Integer> answerList, String attackNumber) {
 
         //attackListを初期化
-
+    	attackList.clear();
         // attackNumberを1桁区切りにして、String型ListのnumberListに格納
-
+    	List<String> numberList = new  java.util.ArrayList<>();
+    	numberList.add(attackNumber.substring(0,1));
+    	numberList.add(attackNumber.substring(1,2));
+    	numberList.add(attackNumber.substring(2,3));
         // String⇒intに変換のうえ、attackListに格納
-
+    	attackList.add(Integer.valueOf(numberList.get(0)));
+    	attackList.add(Integer.valueOf(numberList.get(1)));
+    	attackList.add(Integer.valueOf(numberList.get(2)));
         // hitResultにgetHitCount呼び出し結果を格納
-
+    	int hitResult = getHitCount(answerList,attackList);
         // String⇒intに変換のうえ、attackListに格納
 
         // hitResultにgetHitCount呼び出し結果を格納
 
         // blowResultにgetBlowCount呼び出し結果を格納
-
+    	int blowResult = getBlowCount(answerList,attackList);
         // attackResultに判定結果を格納
-
+    	List<Integer> attckResult = new  java.util.ArrayList<>();
+    	attckResult.add(hitResult);
+    	attckResult.add(blowResult);
+    	return attckResult;
     }
 
     /**
@@ -91,6 +112,13 @@ public class NumeronService {
      */
     public int getHitCount(List<Integer> answerList, List<Integer> attackList) {
         // 数値と場所があっている場合の判定
+    	int hitCount = 0;
+    	for(Integer answer:answerList) {
+    		if(answer == attackList.get(answerList.indexOf(answer))) {
+    			hitCount++;
+    		}
+    	}
+    	return hitCount;
     }
 
     /**
@@ -107,6 +135,13 @@ public class NumeronService {
      */
     public int getBlowCount(List<Integer> answerList, List<Integer> attackList) {
         // 数値を使用しているが、場所があっていない場合の判定
+    	int blowCount = 0;
+    	for(Integer answer:answerList) {
+    		if(attackList.contains(answer)&&answerList.indexOf(answer)!=attackList.indexOf(answer)) {
+    			blowCount++;
+    		}
+    	}
+    	return blowCount;
     }
 
     /**
@@ -117,6 +152,7 @@ public class NumeronService {
      * </pre>
      */
     public void addturn() {
+    	turn++;
     }
 
     /**
@@ -127,6 +163,7 @@ public class NumeronService {
      * @return answerList 答えのリスト
      */
     public List<Integer> getAnswerList() {
+    	return answerList;
     }
 
     /**
@@ -137,6 +174,7 @@ public class NumeronService {
      *  @return turn ターン数
      */
     public int getTurn() {
+    	return turn;
     }
 
     /**
@@ -153,5 +191,17 @@ public class NumeronService {
      *  @return rank　
      */
     public List<String> getRank(int turn) {
+    	List<String> rank = new  java.util.ArrayList<>();
+    	if(turn<=5) {
+    		rank.add("A");
+    		rank.add("すごい");
+    	}else if(turn > 5 && turn <= 10) {
+    		rank.add("B");
+    		rank.add("ふつう");
+    	}else {
+    		rank.add("C");
+    		rank.add("がんばろう");
+    	}
+    	return rank;
     }
 }
